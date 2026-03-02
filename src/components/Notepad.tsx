@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { NotebookPen, X } from 'lucide-react';
+import { NotebookPen, X, Minus } from 'lucide-react';
 
 const colorBg: Record<string, string> = {
     Red: 'bg-red-500/20 border-red-500',
@@ -71,12 +71,21 @@ export function Notepad({ playerId, isOpen, onToggle, position }: NotepadProps) 
                         <NotebookPen className="w-4 h-4" />
                         Player {playerId}'s Notepad
                     </h3>
-                    <button
-                        onClick={clearAll}
-                        className="text-xs text-gray-400 hover:text-white transition-colors"
-                    >
-                        Clear
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                            onClick={clearAll}
+                            className="text-xs text-gray-400 hover:text-white transition-colors"
+                        >
+                            Clear
+                        </button>
+                        <button
+                            onClick={onToggle}
+                            className="text-gray-400 hover:text-white transition-colors p-0.5 rounded hover:bg-white/10"
+                            title="Minimize"
+                        >
+                            <Minus className="w-4 h-4" />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="p-3">
@@ -99,8 +108,8 @@ export function Notepad({ playerId, isOpen, onToggle, position }: NotepadProps) 
                                 <div key={color} className="contents">
                                     <div
                                         className={`text-xs font-medium px-1 py-0.5 rounded ${color === 'Red' ? 'text-red-400' :
-                                                color === 'Yellow' ? 'text-amber-400' :
-                                                    'text-blue-400'
+                                            color === 'Yellow' ? 'text-amber-400' :
+                                                'text-blue-400'
                                             }`}
                                     >
                                         {color.charAt(0)}
