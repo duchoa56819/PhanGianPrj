@@ -21,7 +21,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
 
     const handleCreateRoom = async () => {
         if (!playerName.trim()) {
-            setError('Please enter your name');
+            setError('Vui lòng nhập tên của bạn');
             return;
         }
 
@@ -38,9 +38,9 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
         } catch (err: unknown) {
             const errorMessage = err instanceof Error ? err.message : 'Unknown error';
             if (errorMessage.includes('PERMISSION_DENIED')) {
-                setError('Firebase permission denied. Check your database rules in Firebase Console.');
+                setError('Từ chối quyền truy cập Firebase. Kiểm tra lại rules.');
             } else {
-                setError(`Failed to create room: ${errorMessage}`);
+                setError(`Không thể tạo phòng: ${errorMessage}`);
             }
             console.error('Create room error:', err);
         } finally {
@@ -50,11 +50,11 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
 
     const handleJoinRoom = async () => {
         if (!playerName.trim()) {
-            setError('Please enter your name');
+            setError('Vui lòng nhập tên của bạn');
             return;
         }
         if (!roomCode.trim() || roomCode.length !== 4) {
-            setError('Please enter a valid 4-character room code');
+            setError('Vui lòng nhập mã phòng hợp lệ (4 ký tự)');
             return;
         }
 
@@ -67,14 +67,14 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
             if (result.success && result.playerId) {
                 onJoinGame(roomCode.toUpperCase(), result.playerId, playerName.trim());
             } else {
-                setError(result.error || 'Failed to join room');
+                setError(result.error || 'Không thể vào phòng');
             }
         } catch (err: unknown) {
             const errorMessage = err instanceof Error ? err.message : 'Unknown error';
             if (errorMessage.includes('PERMISSION_DENIED')) {
-                setError('Firebase permission denied. Check your database rules in Firebase Console.');
+                setError('Từ chối quyền truy cập Firebase. Kiểm tra lại rules.');
             } else {
-                setError(`Failed to join room: ${errorMessage}`);
+                setError(`Không thể vào phòng: ${errorMessage}`);
             }
             console.error('Join room error:', err);
         } finally {
@@ -100,9 +100,9 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                 {/* Header */}
                 <div className="text-center mb-8">
                     <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-jade to-emerald-400 bg-clip-text text-transparent">
-                        🔮 Jade Detective
+                        🔮 Phán Gian
                     </h1>
-                    <p className="text-gray-400">Online Multiplayer</p>
+                    <p className="text-gray-400">Chế độ chơi Trực tuyến</p>
                 </div>
 
                 {/* Main Menu */}
@@ -119,7 +119,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 text-white font-semibold text-lg transition-all hover:scale-[1.02]"
                         >
                             <Plus className="w-5 h-5" />
-                            Create Room
+                            Tạo Phòng
                         </button>
 
                         <button
@@ -129,7 +129,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 text-white font-semibold text-lg transition-all hover:scale-[1.02]"
                         >
                             <LogIn className="w-5 h-5" />
-                            Join Room
+                            Vào Phòng
                         </button>
 
                         <div className="relative my-6">
@@ -137,7 +137,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 <div className="w-full border-t border-white/10" />
                             </div>
                             <div className="relative flex justify-center">
-                                <span className="px-4 bg-surface-dark text-gray-500 text-sm">or</span>
+                                <span className="px-4 bg-surface-dark text-gray-500 text-sm">hoặc</span>
                             </div>
                         </div>
 
@@ -148,7 +148,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 text-gray-400 font-medium transition-all"
                         >
                             <Users className="w-5 h-5" />
-                            Play Local (Same Device)
+                            Chơi Offline (Cùng chung thiết bị)
                         </button>
                     </motion.div>
                 )}
@@ -163,12 +163,12 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                         {!isWaiting ? (
                             <>
                                 <div>
-                                    <label className="block text-sm text-gray-400 mb-2">Your Name</label>
+                                    <label className="block text-sm text-gray-400 mb-2">Tên của bạn</label>
                                     <input
                                         type="text"
                                         value={playerName}
                                         onChange={(e) => setPlayerName(e.target.value)}
-                                        placeholder="Enter your name"
+                                        placeholder="Nhập tên của bạn"
                                         className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-white/10
                                             text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-jade"
                                         maxLength={20}
@@ -185,7 +185,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                         className="px-6 py-3 rounded-xl bg-surface-card hover:bg-surface-elevated
                                             text-gray-400 font-medium transition-colors"
                                     >
-                                        Back
+                                        Quay lại
                                     </button>
                                     <button
                                         onClick={handleCreateRoom}
@@ -197,7 +197,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                         {isLoading ? (
                                             <Loader2 className="w-5 h-5 animate-spin" />
                                         ) : (
-                                            'Create Room'
+                                            'Tạo Phòng'
                                         )}
                                     </button>
                                 </div>
@@ -206,10 +206,10 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                             <div className="text-center py-8">
                                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-jade/20 text-jade mb-6">
                                     <Wifi className="w-4 h-4" />
-                                    Room Created
+                                    Đã Tạo Phòng
                                 </div>
 
-                                <p className="text-gray-400 mb-2">Room Code:</p>
+                                <p className="text-gray-400 mb-2">Mã số Phỏng:</p>
                                 <div className="flex items-center justify-center gap-3 mb-6">
                                     <span className="text-4xl font-mono font-bold tracking-widest text-white">
                                         {createdRoomId}
@@ -228,7 +228,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
 
                                 <div className="flex items-center justify-center gap-2 text-gray-400">
                                     <Loader2 className="w-5 h-5 animate-spin" />
-                                    Waiting for opponent to join...
+                                    Đang chờ đối thủ vào phòng...
                                 </div>
                             </div>
                         )}
@@ -243,12 +243,12 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                         animate={{ opacity: 1, y: 0 }}
                     >
                         <div>
-                            <label className="block text-sm text-gray-400 mb-2">Your Name</label>
+                            <label className="block text-sm text-gray-400 mb-2">Tên của bạn</label>
                             <input
                                 type="text"
                                 value={playerName}
                                 onChange={(e) => setPlayerName(e.target.value)}
-                                placeholder="Enter your name"
+                                placeholder="Nhập tên của bạn"
                                 className="w-full px-4 py-3 rounded-xl bg-surface-elevated border border-white/10
                                     text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-jade"
                                 maxLength={20}
@@ -256,7 +256,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                         </div>
 
                         <div>
-                            <label className="block text-sm text-gray-400 mb-2">Room Code</label>
+                            <label className="block text-sm text-gray-400 mb-2">Mã Phòng</label>
                             <input
                                 type="text"
                                 value={roomCode}
@@ -279,7 +279,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 className="px-6 py-3 rounded-xl bg-surface-card hover:bg-surface-elevated
                                     text-gray-400 font-medium transition-colors"
                             >
-                                Back
+                                Quay lại
                             </button>
                             <button
                                 onClick={handleJoinRoom}
@@ -291,7 +291,7 @@ export function LobbyScreen({ onJoinGame, onPlayLocal }: LobbyScreenProps) {
                                 {isLoading ? (
                                     <Loader2 className="w-5 h-5 animate-spin" />
                                 ) : (
-                                    'Join Room'
+                                    'Vào Phòng'
                                 )}
                             </button>
                         </div>

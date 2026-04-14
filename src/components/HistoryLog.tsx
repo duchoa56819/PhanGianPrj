@@ -34,14 +34,14 @@ export function HistoryLog({ entries, isOpen, onToggle }: HistoryLogProps) {
                 <div className="p-4 border-b border-white/10">
                     <h3 className="font-semibold text-white flex items-center gap-2">
                         <History className="w-4 h-4" />
-                        Game History
+                        Lịch Sử Trận Đấu
                     </h3>
                 </div>
 
                 <div className="max-h-96 overflow-y-auto p-2">
                     {entries.length === 0 ? (
                         <p className="text-gray-400 text-center py-8 text-sm">
-                            No moves yet
+                            Chưa có lượt nào
                         </p>
                     ) : (
                         <div className="space-y-2">
@@ -55,7 +55,7 @@ export function HistoryLog({ entries, isOpen, onToggle }: HistoryLogProps) {
                                 >
                                     <div className="flex items-center gap-2 mb-1">
                                         <span className="font-semibold text-jade">
-                                            Player {entry.playerId}
+                                            Người chơi {entry.playerId}
                                         </span>
                                         {entry.action === 'clue' ? (
                                             <MessageCircle className="w-3 h-3 text-blue-400" />
@@ -68,7 +68,7 @@ export function HistoryLog({ entries, isOpen, onToggle }: HistoryLogProps) {
                                         <>
                                             {entry.cardPlayed && (
                                                 <p className="text-gray-300">
-                                                    Played <span className="font-medium text-white">
+                                                    Đã đánh <span className="font-medium text-white">
                                                         {getCardName(entry.cardPlayed)}
                                                     </span>
                                                 </p>
@@ -84,17 +84,17 @@ export function HistoryLog({ entries, isOpen, onToggle }: HistoryLogProps) {
                                     {entry.action === 'accuse' && entry.accuseGuess && (
                                         <div className="flex items-center gap-2">
                                             <p className="text-gray-300">
-                                                Guessed: <span className="font-medium text-white">
+                                                Đã đoán: <span className="font-medium text-white">
                                                     {entry.accuseGuess.color} {entry.accuseGuess.number}
                                                 </span>
                                             </p>
                                             {entry.accuseResult === 'correct' ? (
                                                 <span className="flex items-center gap-1 text-jade text-xs">
-                                                    <Check className="w-3 h-3" /> Correct!
+                                                    <Check className="w-3 h-3" /> Chính xác
                                                 </span>
                                             ) : (
                                                 <span className="flex items-center gap-1 text-red-400 text-xs">
-                                                    <X className="w-3 h-3" /> Wrong
+                                                    <X className="w-3 h-3" /> Sai rồi
                                                 </span>
                                             )}
                                         </div>

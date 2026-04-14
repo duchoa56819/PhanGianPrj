@@ -71,7 +71,7 @@ export function AccuseModal({ isOpen, onSubmit, onCancel }: AccuseModalProps) {
                         <div className="flex items-center justify-between mb-6">
                             <div className="flex items-center gap-2">
                                 <Target className="w-6 h-6 text-red-400" />
-                                <h2 className="text-xl font-bold text-white">Accuse The Mole</h2>
+                                <h2 className="text-xl font-bold text-white">Buộc Tội Phán Gian</h2>
                             </div>
                             <button
                                 onClick={handleClose}
@@ -82,15 +82,15 @@ export function AccuseModal({ isOpen, onSubmit, onCancel }: AccuseModalProps) {
                         </div>
 
                         <p className="text-gray-400 text-sm mb-6">
-                            Select the color and number of the hidden Mole card.
-                            <span className="text-jade"> Correct: +2 Jades.</span>
-                            <span className="text-red-400"> Wrong: Opponent +1 Jade.</span>
+                            Chọn thẻ Màu và Số của thẻ Phán Gian (Thẻ ẩn).
+                            <span className="text-jade"> Nếu đúng: Bạn +2 Ngọc.</span>
+                            <span className="text-red-400"> Nếu sai: Đối thủ +1 Ngọc.</span>
                         </p>
 
                         {/* Color Selection */}
                         <div className="mb-6">
                             <label className="block text-sm text-gray-400 mb-2 uppercase tracking-wide">
-                                Select Color
+                                Chọn Màu
                             </label>
                             <div className="grid grid-cols-4 gap-2">
                                 {COLORS.map((color) => (
@@ -107,14 +107,14 @@ export function AccuseModal({ isOpen, onSubmit, onCancel }: AccuseModalProps) {
                                 ))}
                             </div>
                             {selectedColor === 'Black' && (
-                                <p className="text-xs text-gray-500 mt-2">Black cards have numbers 5, 6, 7</p>
+                                <p className="text-xs text-gray-500 mt-2">Thẻ màu Đen dành riêng cho số 5, 6, 7</p>
                             )}
                         </div>
 
                         {/* Number Selection */}
                         <div className="mb-6">
                             <label className="block text-sm text-gray-400 mb-2 uppercase tracking-wide">
-                                Select Number {selectedColor === 'Black' ? '(5-7)' : '(1-4)'}
+                                Chọn Đầu Số {selectedColor === 'Black' ? '(5-7)' : '(1-4)'}
                             </label>
                             <div className="grid grid-cols-4 gap-2">
                                 {validNumbers.map((num) => (
@@ -137,10 +137,10 @@ export function AccuseModal({ isOpen, onSubmit, onCancel }: AccuseModalProps) {
                             <div className="text-gray-400">
                                 {selectedColor && selectedNumber ? (
                                     <span className="text-white font-semibold">
-                                        Guess: {selectedColor} {selectedNumber}
+                                        Đã Chọn: {selectedColor} {selectedNumber}
                                     </span>
                                 ) : (
-                                    'Select color and number'
+                                    'Hãy chọn màu và số'
                                 )}
                             </div>
                             <button
@@ -152,7 +152,7 @@ export function AccuseModal({ isOpen, onSubmit, onCancel }: AccuseModalProps) {
                   transition-all duration-200"
                             >
                                 <Check className="w-5 h-5" />
-                                Confirm Accusation
+                                Xác Nhận Buộc Tội
                             </button>
                         </div>
                     </motion.div>

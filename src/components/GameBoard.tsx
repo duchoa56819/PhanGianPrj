@@ -59,18 +59,18 @@ export function GameBoard() {
                     animate={{ scale: 1, opacity: 1 }}
                 >
                     <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-jade to-emerald-400 bg-clip-text text-transparent">
-                        🔮 Jade Detective
+                        🔮 Phán Gian
                     </h1>
                     <p className="text-xl text-gray-300 mb-2">Truy Tìm Nội Gián</p>
                     <p className="text-gray-400 mb-8">
-                        A deduction card game for 2 players. Find the hidden Mole card to win!
+                        Biến thể game suy luận cho 2 người. Tìm ra lá Phán Gian đang ẩn để giành chiến thắng!
                     </p>
 
                     <div className="glass rounded-xl p-4 mb-8 text-left text-sm space-y-2 text-gray-300">
-                        <p>🎴 15 cards, 1 hidden Mole, 1 revealed Innocent</p>
-                        <p>🔄 Take turns: Play a card + Give a clue, or Accuse</p>
-                        <p>💎 Correct accusation: +2 Jades. Wrong: Opponent +1</p>
-                        <p>🏆 First to 3 Jades wins!</p>
+                        <p>🎴 15 lá bài, 1 Phán Gian (ẩn), 1 Kẻ Vô Tội (lật)</p>
+                        <p>🔄 Chơi theo lượt: Đánh bài + Cung cấp thông tin, hoặc Buộc Tội</p>
+                        <p>💎 Buộc tội đúng: +2 Ngọc. Sai: Địch +1 Ngọc</p>
+                        <p>🏆 Ai có 3 Ngọc trước đội đó thắng!</p>
                     </div>
 
                     <motion.button
@@ -82,7 +82,7 @@ export function GameBoard() {
                         whileTap={{ scale: 0.95 }}
                     >
                         <Play className="w-6 h-6" />
-                        Start Game
+                        Bắt Đầu
                     </motion.button>
                 </motion.div>
             </div>
@@ -100,10 +100,10 @@ export function GameBoard() {
                 >
                     <Trophy className="w-20 h-20 text-amber-400 mx-auto mb-4" />
                     <h1 className="text-4xl font-bold mb-4 text-amber-400">
-                        Player {winner} Wins!
+                        Người chơi {winner} Đã Thắng!
                     </h1>
                     <p className="text-gray-300 mb-8">
-                        Congratulations! You collected 3 Jade tokens.
+                        Xin chúc mừng! Bạn đã gom đủ 3 viên Ngọc.
                     </p>
 
                     <div className="flex gap-4 justify-center">
@@ -116,7 +116,7 @@ export function GameBoard() {
                             whileTap={{ scale: 0.95 }}
                         >
                             <RotateCcw className="w-5 h-5" />
-                            Play Again
+                            Chơi Lại
                         </motion.button>
                     </div>
                 </motion.div>
@@ -138,12 +138,12 @@ export function GameBoard() {
                 >
                     <AlertCircle className={`w-16 h-16 mx-auto mb-4 ${wasCorrect ? 'text-jade' : 'text-red-400'}`} />
                     <h2 className="text-3xl font-bold mb-4">
-                        {wasCorrect ? 'Correct Accusation!' : 'Wrong Accusation!'}
+                        {wasCorrect ? 'Buộc Tội Chính Xác!' : 'Buộc Tội Sai!'}
                     </h2>
 
                     {moleCard && (
                         <div className="mb-6">
-                            <p className="text-gray-400 mb-2">The Mole was:</p>
+                            <p className="text-gray-400 mb-2">Thẻ Phán Gian là:</p>
                             <div className="flex justify-center">
                                 <Card card={moleCard} size="lg" />
                             </div>
@@ -153,7 +153,7 @@ export function GameBoard() {
                     <div className="flex gap-8 justify-center mb-8">
                         {players.map(p => (
                             <div key={p.id} className="text-center">
-                                <p className="text-gray-400">Player {p.id}</p>
+                                <p className="text-gray-400">Người chơi {p.id}</p>
                                 <div className="flex items-center gap-1 justify-center">
                                     <Gem className="w-5 h-5 text-jade" />
                                     <span className="text-2xl font-bold text-jade">{p.jades}</span>
@@ -171,7 +171,7 @@ export function GameBoard() {
                         whileTap={{ scale: 0.95 }}
                     >
                         <RotateCcw className="w-5 h-5" />
-                        Start Next Round
+                        Bắt Đầu Ván Mới
                     </motion.button>
                 </motion.div>
             </div>
@@ -183,8 +183,8 @@ export function GameBoard() {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-jade">🔮 Jade Detective</h1>
-                    <p className="text-sm text-gray-400">Round {roundNumber}</p>
+                    <h1 className="text-2xl font-bold text-jade">🔮 Phán Gian</h1>
+                    <p className="text-sm text-gray-400">Vòng {roundNumber}</p>
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -230,7 +230,7 @@ export function GameBoard() {
                         {/* Mole Card (Hidden) */}
                         <div className="text-center">
                             <p className="text-xs text-gray-400 uppercase tracking-wide mb-2">
-                                🕵️ The Mole (Hidden)
+                                🕵️ Phán Gian (Ẩn)
                             </p>
                             {moleCard && <Card card={moleCard} faceDown />}
                         </div>
@@ -238,7 +238,7 @@ export function GameBoard() {
                         {/* Innocent Card (Revealed) */}
                         <div className="text-center">
                             <p className="text-xs text-gray-400 uppercase tracking-wide mb-2">
-                                ✅ Innocent (Revealed)
+                                ✅ Kẻ vô tội (Lật)
                             </p>
                             {innocentCard && <Card card={innocentCard} disabled />}
                         </div>
@@ -254,7 +254,7 @@ export function GameBoard() {
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <p className="text-center text-gray-400 mb-4">
-                                    Player {currentPlayer}'s turn - Select a card from your hand to play, or accuse
+                                    Lượt của Người chơi {currentPlayer} - Chọn bài để đánh, hoặc thực hiện Buộc Tội
                                 </p>
                                 <ActionMenu
                                     onExchangeInfo={() => { }}

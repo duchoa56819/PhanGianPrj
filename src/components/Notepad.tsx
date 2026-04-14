@@ -71,14 +71,14 @@ export function Notepad({ playerId, isOpen, onToggle, position, autoEliminatedId
                 <div className="p-3 border-b border-white/10 flex items-center justify-between">
                     <h3 className="font-semibold text-white flex items-center gap-2 text-sm">
                         <NotebookPen className="w-4 h-4" />
-                        Player {playerId}'s Notepad
+                        Sổ tay Người chơi {playerId}
                     </h3>
                     <div className="flex items-center gap-2">
                         <button
                             onClick={clearAll}
                             className="text-xs text-gray-400 hover:text-white transition-colors"
                         >
-                            Clear
+                            Làm sạch
                         </button>
                         <button
                             onClick={onToggle}
@@ -92,7 +92,7 @@ export function Notepad({ playerId, isOpen, onToggle, position, autoEliminatedId
 
                 <div className="p-3">
                     <p className="text-xs text-gray-400 mb-2">
-                        ❌ eliminated → ⭐ suspected → clear
+                        ❌ loại trừ → ⭐ nghi ngờ → trống
                     </p>
 
                     {/* Standard Colors Section (1-4) */}
@@ -147,7 +147,7 @@ export function Notepad({ playerId, isOpen, onToggle, position, autoEliminatedId
 
                     {/* Black Section (5-7) */}
                     <div>
-                        <p className="text-xs text-gray-500 mb-1">Black (5-7)</p>
+                        <p className="text-xs text-gray-500 mb-1">Màu Đen (5-7)</p>
                         <div className="grid grid-cols-4 gap-1">
                             {/* Header */}
                             <div className="text-xs text-gray-500 font-medium">#</div>

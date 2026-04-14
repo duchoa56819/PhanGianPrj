@@ -48,7 +48,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
             <div className="min-h-screen flex items-center justify-center">
                 <div className="glass rounded-2xl p-8 text-center">
                     <Loader2 className="w-12 h-12 text-jade animate-spin mx-auto mb-4" />
-                    <p className="text-gray-400">Connecting to game...</p>
+                    <p className="text-gray-400">Đang kết nối vào game...</p>
                 </div>
             </div>
         );
@@ -60,12 +60,12 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
             <div className="min-h-screen flex items-center justify-center">
                 <div className="glass rounded-2xl p-8 text-center">
                     <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-                    <p className="text-red-400 mb-4">{error || 'Failed to load game'}</p>
+                    <p className="text-red-400 mb-4">{error || 'Không thể tải game'}</p>
                     <button
                         onClick={onLeave}
                         className="px-6 py-2 rounded-xl bg-surface-elevated hover:bg-surface-card text-white"
                     >
-                        Back to Lobby
+                        Về Sảnh
                     </button>
                 </div>
             </div>
@@ -77,18 +77,18 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
         return (
             <div className="min-h-screen flex items-center justify-center">
                 <div className="glass rounded-2xl p-8 text-center max-w-md">
-                    <h2 className="text-2xl font-bold text-jade mb-4">Room Created!</h2>
-                    <p className="text-gray-400 mb-2">Share this code with your opponent:</p>
+                    <h2 className="text-2xl font-bold text-jade mb-4">Đã Tạo Phòng!</h2>
+                    <p className="text-gray-400 mb-2">Chia sẻ mã phòng này cho đối thủ của bạn:</p>
                     <p className="text-4xl font-mono font-bold text-white mb-6 tracking-widest">{roomId}</p>
                     <div className="flex items-center justify-center gap-2 text-gray-400">
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        Waiting for opponent to join...
+                        Đang chờ đối thủ vào phòng...
                     </div>
                     <button
                         onClick={onLeave}
                         className="mt-6 px-6 py-2 rounded-xl bg-surface-elevated hover:bg-surface-card text-gray-400"
                     >
-                        Cancel
+                        Hủy
                     </button>
                 </div>
             </div>
@@ -98,7 +98,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
     // Convert online players to local Player format for components
     const toLocalPlayer = (p: typeof myPlayer, id: 1 | 2): Player => ({
         id,
-        name: p?.name || `Player ${id}`,
+        name: p?.name || `Người chơi ${id}`,
         hand: p?.hand || [],
         table: p?.table || [],
         jades: p?.jades || 0,
@@ -159,10 +159,10 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                 >
                     <Trophy className="w-20 h-20 text-amber-400 mx-auto mb-4" />
                     <h1 className="text-4xl font-bold mb-4 text-amber-400">
-                        {winner.id === myPlayerNum ? 'You Win!' : `${opponentPlayer?.name} Wins!`}
+                        {winner.id === myPlayerNum ? 'Bạn Đã Thắng!' : `${opponentPlayer?.name} Đã Thắng!`}
                     </h1>
                     <p className="text-gray-300 mb-8">
-                        {winner.id === myPlayerNum ? 'Congratulations!' : 'Better luck next time!'}
+                        {winner.id === myPlayerNum ? 'Xin chúc mừng!' : 'Chúc may mắn lần sau nhé!'}
                     </p>
                     <button
                         onClick={onLeave}
@@ -200,11 +200,11 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                 >
                     <AlertCircle className={`w-16 h-16 mx-auto mb-4 ${wasCorrect ? 'text-jade' : 'text-red-400'}`} />
                     <h2 className="text-3xl font-bold mb-4">
-                        {wasCorrect ? 'Correct Accusation!' : 'Wrong Accusation!'}
+                        {wasCorrect ? 'Buộc Tội Chính Xác!' : 'Buộc Tội Sai!'}
                     </h2>
 
                     <div className="mb-6">
-                        <p className="text-gray-400 mb-2">The Mole was:</p>
+                        <p className="text-gray-400 mb-2">Thẻ Phán Gian là:</p>
                         <div className="flex justify-center">
                             <Card card={roomData.board.moleCard} size="lg" />
                         </div>
@@ -236,7 +236,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                         whileTap={{ scale: 0.95 }}
                     >
                         <RotateCcw className="w-5 h-5" />
-                        Start Next Round
+                        Bắt Đầu Ván Mới
                     </motion.button>
                 </motion.div>
             </div>
@@ -270,8 +270,8 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
             {/* Header */}
             <div className="flex items-center justify-between mb-6 mt-12">
                 <div>
-                    <h1 className="text-2xl font-bold text-jade">🔮 Jade Detective</h1>
-                    <p className="text-sm text-gray-400">Round {roomData.roundNumber}</p>
+                    <h1 className="text-2xl font-bold text-jade">🔮 Phán Gian</h1>
+                    <p className="text-sm text-gray-400">Vòng {roomData.roundNumber}</p>
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -280,7 +280,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                         <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full 
                             ${isMyTurn ? 'bg-jade/20 ring-2 ring-jade' : 'bg-surface-elevated'}`}
                         >
-                            <span className="text-sm font-medium">{myPlayer?.name} (You)</span>
+                            <span className="text-sm font-medium">{myPlayer?.name} (Bạn)</span>
                             <Gem className="w-4 h-4 text-jade" />
                             <span className="font-bold text-jade">{myPlayer?.jades}</span>
                         </div>
@@ -301,23 +301,23 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                 <div className="glass rounded-2xl p-4 mb-4">
                     <div className="flex items-center justify-between mb-3">
                         <h3 className="text-lg font-semibold text-gray-300">
-                            {opponentPlayer?.name}'s Area
-                            {!isMyTurn && <span className="ml-2 text-jade text-sm">(Their Turn)</span>}
+                            Khu vực của {opponentPlayer?.name}
+                            {!isMyTurn && <span className="ml-2 text-jade text-sm">(Đang ra bài)</span>}
                         </h3>
                         <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-400">Hand: {opponentPlayer?.hand.length || 0}</span>
+                            <span className="text-sm text-gray-400">Trên tay: {opponentPlayer?.hand.length || 0}</span>
                         </div>
                     </div>
 
                     {/* Opponent's table cards (visible) */}
                     <div className="mb-3">
-                        <p className="text-xs text-gray-500 mb-2">Played Cards</p>
+                        <p className="text-xs text-gray-500 mb-2">Bài Đã Đánh Ra</p>
                         <div className="flex gap-2 flex-wrap min-h-[60px]">
                             {(opponentPlayer?.table || []).map(card => (
                                 <Card key={card.id} card={card} size="sm" />
                             ))}
                             {(!opponentPlayer?.table || opponentPlayer.table.length === 0) && (
-                                <span className="text-gray-600 text-sm">No cards played yet</span>
+                                <span className="text-gray-600 text-sm">Chưa đánh lá bài nào</span>
                             )}
                         </div>
                     </div>
@@ -329,7 +329,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                         {/* Mole Card (Hidden) */}
                         <div className="text-center">
                             <p className="text-xs text-gray-400 uppercase tracking-wide mb-2">
-                                🕵️ The Mole (Hidden)
+                                🕵️ Phán Gian (Ẩn)
                             </p>
                             <Card card={roomData.board.moleCard} faceDown />
                         </div>
@@ -337,7 +337,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                         {/* Innocent Card (Revealed) */}
                         <div className="text-center">
                             <p className="text-xs text-gray-400 uppercase tracking-wide mb-2">
-                                ✅ Innocent (Revealed)
+                                ✅ Kẻ Vô Tội (Lật)
                             </p>
                             <Card card={roomData.board.innocentCard} disabled />
                         </div>
@@ -353,7 +353,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                                 exit={{ opacity: 0, y: -10 }}
                             >
                                 <p className="text-center text-jade mb-4 font-semibold">
-                                    Your turn - Select a card from your hand to play, or accuse
+                                    Tới lượt của bạn - Hãy chọn một lá bài để đánh ra mặt bàn, hoặc tiến hành Buộc Tội
                                 </p>
                                 <ActionMenu
                                     onExchangeInfo={() => { }}
@@ -373,7 +373,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                             >
                                 <div className="flex items-center justify-center gap-2 text-gray-400">
                                     <Loader2 className="w-5 h-5 animate-spin" />
-                                    Waiting for {opponentPlayer?.name}'s move...
+                                    Đang chờ {opponentPlayer?.name} suy nghĩ...
                                 </div>
                             </motion.div>
                         )}
@@ -399,27 +399,27 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                 <div className="glass rounded-2xl p-4">
                     <div className="flex items-center justify-between mb-3">
                         <h3 className="text-lg font-semibold text-white">
-                            Your Hand
-                            {isMyTurn && <span className="ml-2 text-jade text-sm">(Your Turn)</span>}
+                            Bài Trên Tay
+                            {isMyTurn && <span className="ml-2 text-jade text-sm">(Lượt của bạn)</span>}
                         </h3>
                     </div>
 
                     {/* My played cards */}
                     <div className="mb-4">
-                        <p className="text-xs text-gray-500 mb-2">Your Played Cards</p>
+                        <p className="text-xs text-gray-500 mb-2">Bài Đã Đánh Ra</p>
                         <div className="flex gap-2 flex-wrap min-h-[60px]">
                             {(myPlayer?.table || []).map(card => (
                                 <Card key={card.id} card={card} size="sm" />
                             ))}
                             {(!myPlayer?.table || myPlayer.table.length === 0) && (
-                                <span className="text-gray-600 text-sm">No cards played yet</span>
+                                <span className="text-gray-600 text-sm">Chưa đánh lá bài nào</span>
                             )}
                         </div>
                     </div>
 
                     {/* My hand */}
                     <div>
-                        <p className="text-xs text-gray-500 mb-2">Click a card to play</p>
+                        <p className="text-xs text-gray-500 mb-2">Nhấn vào một lá bài để chọn</p>
                         <div className="flex gap-2 flex-wrap">
                             {(myPlayer?.hand || []).map(card => (
                                 <motion.div

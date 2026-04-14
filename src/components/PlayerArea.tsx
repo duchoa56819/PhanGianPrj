@@ -41,7 +41,7 @@ export function PlayerArea({
                         {player.name}
                         {isCurrentPlayer && (
                             <span className="ml-2 text-sm text-jade animate-pulse">
-                                ← Your Turn
+                                ← Lượt của bạn
                             </span>
                         )}
                     </h3>
@@ -63,12 +63,12 @@ export function PlayerArea({
                         {isHandVisible ? (
                             <>
                                 <EyeOff className="w-4 h-4" />
-                                Hide Hand
+                                Ẩn Bài
                             </>
                         ) : (
                             <>
                                 <Eye className="w-4 h-4" />
-                                Show Hand
+                                Xem Bài
                             </>
                         )}
                     </button>
@@ -79,7 +79,7 @@ export function PlayerArea({
             {player.table.length > 0 && (
                 <div className="mb-4">
                     <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide">
-                        Played Cards
+                        Bài Đã Đánh Ra
                     </p>
                     <div className="flex flex-wrap gap-2">
                         {player.table.map((card) => (
@@ -97,7 +97,7 @@ export function PlayerArea({
             {/* Hand */}
             <div>
                 <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide">
-                    Hand ({player.hand.length} cards)
+                    Trên tay ({player.hand.length} lá)
                 </p>
                 <div className="flex flex-wrap gap-2">
                     {shouldShowHand ? (

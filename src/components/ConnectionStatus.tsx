@@ -36,7 +36,7 @@ export function ConnectionStatus({
             <div className="glass rounded-full px-4 py-2 flex items-center gap-4">
                 {/* Room Code */}
                 <div className="flex items-center gap-2">
-                    <span className="text-xs text-gray-400">Room:</span>
+                    <span className="text-xs text-gray-400">Phòng:</span>
                     <span className="font-mono font-bold text-jade">{roomId}</span>
                     <button
                         onClick={copyRoomCode}
@@ -72,7 +72,7 @@ export function ConnectionStatus({
                             <WifiOff className="w-3 h-3 text-red-400" />
                         )}
                         <span className="text-xs text-gray-300">
-                            {opponentName || 'Waiting...'}
+                            {opponentName || 'Đang chờ...'}
                         </span>
                     </div>
                 </div>
@@ -85,7 +85,7 @@ export function ConnectionStatus({
                     className="flex items-center gap-1 text-xs text-gray-400 hover:text-red-400 transition-colors"
                 >
                     <LogOut className="w-3 h-3" />
-                    Leave
+                    Thoát
                 </button>
             </div>
         </motion.div>

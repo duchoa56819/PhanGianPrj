@@ -28,8 +28,8 @@ export function ActionMenu({ onExchangeInfo, onAccuse, disabled }: ActionMenuPro
             >
                 <Search className="w-6 h-6" />
                 <div className="text-left">
-                    <div className="text-lg">Exchange Info</div>
-                    <div className="text-xs opacity-75">Play a card & give a clue</div>
+                    <div className="text-lg">Tráo Đổi Thông Tin</div>
+                    <div className="text-xs opacity-75">Đánh một lá bài & Ra dấu gợi ý</div>
                 </div>
             </motion.button>
 
@@ -46,8 +46,8 @@ export function ActionMenu({ onExchangeInfo, onAccuse, disabled }: ActionMenuPro
             >
                 <UserX className="w-6 h-6" />
                 <div className="text-left">
-                    <div className="text-lg">Accuse The Mole</div>
-                    <div className="text-xs opacity-75">Guess the hidden card</div>
+                    <div className="text-lg">Buộc Tội Phán Gian</div>
+                    <div className="text-xs opacity-75">Chỉ điểm thẻ bài bị giấu</div>
                 </div>
             </motion.button>
         </motion.div>
