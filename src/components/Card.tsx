@@ -1,12 +1,8 @@
 import { motion } from 'framer-motion';
 import type { Card as CardType } from '../types/game';
 
-// Import card art images
-import redArt from '../assets/cards/red.png';
-import yellowArt from '../assets/cards/yellow.png';
-import blueArt from '../assets/cards/blue.png';
-import blackArt from '../assets/cards/black.png';
-import backArt from '../assets/cards/back.png';
+// Face down card gradient override
+const backGradient = 'bg-gradient-to-br from-emerald-800 to-emerald-950';
 
 interface CardProps {
     card: CardType;
@@ -18,42 +14,41 @@ interface CardProps {
 }
 
 const colorConfig: Record<string, {
-    art: string;
+    bgGradient: string;
     numBg: string;
     numText: string;
     borderColor: string;
     glowColor: string;
 }> = {
     Red: {
-        art: redArt,
+        bgGradient: 'bg-gradient-to-br from-red-500 to-red-800',
         numBg: 'bg-red-600',
         numText: 'text-white',
         borderColor: 'border-red-400/60',
         glowColor: 'rgba(239, 68, 68, 0.6)',
     },
     Yellow: {
-        art: yellowArt,
+        bgGradient: 'bg-gradient-to-br from-amber-400 to-amber-700',
         numBg: 'bg-amber-500',
         numText: 'text-white',
         borderColor: 'border-amber-400/60',
         glowColor: 'rgba(245, 158, 11, 0.6)',
     },
     Blue: {
-        art: blueArt,
+        bgGradient: 'bg-gradient-to-br from-blue-500 to-blue-800',
         numBg: 'bg-blue-600',
         numText: 'text-white',
         borderColor: 'border-blue-400/60',
         glowColor: 'rgba(59, 130, 246, 0.6)',
     },
     Black: {
-        art: blackArt,
+        bgGradient: 'bg-gradient-to-br from-gray-700 to-gray-900',
         numBg: 'bg-gray-800',
         numText: 'text-gray-100',
         borderColor: 'border-gray-400/40',
         glowColor: 'rgba(100, 116, 139, 0.6)',
     },
 };
-
 const sizeStyles = {
     sm: { container: 'w-14 h-20', numBadge: 'w-5 h-5 text-[10px]', numBadgeBR: 'w-4 h-4 text-[8px]' },
     md: { container: 'w-20 h-28', numBadge: 'w-7 h-7 text-sm', numBadgeBR: 'w-5 h-5 text-[10px]' },
@@ -73,14 +68,13 @@ export function Card({ card, faceDown, onClick, selected, disabled, size = 'md' 
                 animate={{ scale: 1, rotateY: 0 }}
                 transition={{ duration: 0.3 }}
             >
-                <img
-                    src={backArt}
-                    alt="Card back"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    draggable={false}
-                />
+                <div className={`absolute inset-0 w-full h-full ${backGradient}`} />
                 {/* Subtle dark overlay */}
-                <div className="absolute inset-0 bg-black/10" />
+                <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full border border-emerald-400/30 flex items-center justify-center bg-white/5">
+                        <div className="w-4 h-4 rounded-full bg-emerald-400/20" />
+                    </div>
+                </div>
             </motion.div>
         );
     }
@@ -103,13 +97,8 @@ export function Card({ card, faceDown, onClick, selected, disabled, size = 'md' 
             whileTap={disabled ? {} : { scale: 0.95 }}
             transition={{ duration: 0.2 }}
         >
-            {/* Card art image */}
-            <img
-                src={config.art}
-                alt={`${card.color} card`}
-                className="absolute inset-0 w-full h-full object-cover"
-                draggable={false}
-            />
+            {/* Card background */}
+            <div className={`absolute inset-0 w-full h-full ${config.bgGradient}`} />
 
             {/* Shine overlay */}
             <div className="card-shine-overlay" />
@@ -144,12 +133,7 @@ export function CardBack({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
             className={`${sz.container} rounded-xl overflow-hidden
                 border-2 border-slate-500/40 shadow-lg blur-[2px] relative`}
         >
-            <img
-                src={backArt}
-                alt="Card back"
-                className="absolute inset-0 w-full h-full object-cover"
-                draggable={false}
-            />
+            <div className={`absolute inset-0 w-full h-full ${backGradient}`} />
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
                 <span className="text-2xl text-white/60">?</span>
             </div>

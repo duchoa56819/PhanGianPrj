@@ -243,6 +243,18 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
         );
     }
 
+    // Compute auto-eliminated cards based on public information and my hand
+    const publicCards = [
+        ...(roomData.players.P1?.table || []),
+        ...(roomData.players.P2?.table || []),
+        roomData.board.innocentCard
+    ].filter(Boolean);
+
+    const autoEliminatedIds = [
+        ...publicCards.map(c => `${c.color}-${c.number}`),
+        ...(myPlayer?.hand || []).map(c => `${c.color}-${c.number}`)
+    ];
+
     return (
         <div className="min-h-screen p-4 md:p-6">
             {/* Connection Status Bar */}
@@ -439,6 +451,7 @@ export function OnlineGameBoard({ roomId, playerId, playerName, onLeave }: Onlin
                 isOpen={notepadOpen}
                 onToggle={() => setNotepadOpen(!notepadOpen)}
                 position="left"
+                autoEliminatedIds={autoEliminatedIds}
             />
 
             {/* Accuse Modal */}

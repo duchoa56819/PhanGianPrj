@@ -14,12 +14,14 @@ interface NotepadProps {
     isOpen: boolean;
     onToggle: () => void;
     position: 'left' | 'right';
+    autoEliminatedIds?: string[];
 }
 
-export function Notepad({ playerId, isOpen, onToggle, position }: NotepadProps) {
+export function Notepad({ playerId, isOpen, onToggle, position, autoEliminatedIds = [] }: NotepadProps) {
     const [marks, setMarks] = useState<Record<string, 'eliminated' | 'suspected' | null>>({});
 
     const toggleMark = (id: string) => {
+        if (autoEliminatedIds.includes(id)) return; // Cannot toggle auto-eliminated cards
         setMarks(prev => {
             const current = prev[id];
             if (!current) return { ...prev, [id]: 'eliminated' };
@@ -116,7 +118,10 @@ export function Notepad({ playerId, isOpen, onToggle, position }: NotepadProps) 
                                     </div>
                                     {[1, 2, 3, 4].map(number => {
                                         const id = `${color}-${number}`;
-                                        const mark = marks[id];
+                                        let mark = marks[id];
+                                        if (autoEliminatedIds.includes(id)) {
+                                            mark = 'eliminated';
+                                        }
 
                                         return (
                                             <button
@@ -156,7 +161,10 @@ export function Notepad({ playerId, isOpen, onToggle, position }: NotepadProps) 
                             </div>
                             {[5, 6, 7].map(number => {
                                 const id = `Black-${number}`;
-                                const mark = marks[id];
+                                let mark = marks[id];
+                                if (autoEliminatedIds.includes(id)) {
+                                    mark = 'eliminated';
+                                }
 
                                 return (
                                     <button
