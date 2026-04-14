@@ -5,13 +5,20 @@ import type { Card, Clue, CardColor, CardNumber } from '../types/game';
  * The clue must include/apply to the card being played.
  * 
  * Valid clue types:
- * (a) Color Count: "I have [2/3/4] cards of [Color]." (must include played card's color)
- * (b) Number Count: "I have [2/3] cards of number [Number]." (must include played card's number)
- * (c) Sequence: "I have a sequence of [3/4/5/6/7] consecutive numbers." (must include played card's number)
+ * (a) Color Count: "Tôi có [2/3/4] thẻ cùng màu [Color]." (must include played card's color)
+ * (b) Number Count: "Tôi có [2/3] thẻ cùng số [Number]." (must include played card's number)
+ * (c) Sequence: "Tôi có [3/4/5/6/7] thẻ liên tiếp." (must include played card's number)
  */
 export function getValidClues(hand: Card[], tableCards: Card[], playedCard?: Card, previousClues: Clue[] = []): Clue[] {
     const allCards = [...hand, ...tableCards];
     const clues: Clue[] = [];
+
+    const colorVN: Record<string, string> = {
+        Red: 'đỏ',
+        Yellow: 'vàng',
+        Blue: 'xanh',
+        Black: 'đen'
+    };
 
     // Build a set of previously used clue keys to prevent repetition
     // - Color clues: keyed by color (e.g. "color:Red") — same color can't be reused even with different count
@@ -42,7 +49,7 @@ export function getValidClues(hand: Card[], tableCards: Card[], playedCard?: Car
             if (!playedCard || playedCard.color === color) {
                 clues.push({
                     type: 'color',
-                    text: `I have ${count} ${color} cards`,
+                    text: `Tôi có ${count} thẻ cùng màu ${colorVN[color]}`,
                     details: {
                         color: color as CardColor,
                         count,
@@ -63,7 +70,7 @@ export function getValidClues(hand: Card[], tableCards: Card[], playedCard?: Car
             if (!playedCard || playedCard.number === num) {
                 clues.push({
                     type: 'number',
-                    text: `I have ${count} cards with number ${num}`,
+                    text: `Tôi có ${count} thẻ cùng số ${num}`,
                     details: {
                         number: num,
                         count,
@@ -82,7 +89,7 @@ export function getValidClues(hand: Card[], tableCards: Card[], playedCard?: Car
         if (!playedCard || (playedCard.number >= seqInfo.start && playedCard.number <= seqInfo.end)) {
             clues.push({
                 type: 'sequence',
-                text: `I have a sequence of ${seqInfo.length} consecutive numbers`,
+                text: `Tôi có ${seqInfo.length} thẻ liên tiếp`,
                 details: {
                     sequenceLength: seqInfo.length,
                 },
